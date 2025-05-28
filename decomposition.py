@@ -7,12 +7,8 @@ def run(graph, HE):
 
     Q = Queue()
     V = set(graph.nodes)
-    # print("INITIAL NODE SET:", V)
     for k in range(0, len(HE)): # O(k_max * (E_DH * V^2 + ))
 
-        print(f'k = {k}')
-
-        # k-hypercore
         for node in V:
             if len(graph.nodes[node]['hyperedges']) < k:
                 Q.put(node)
@@ -35,11 +31,8 @@ def run(graph, HE):
                     graph.nodes[out_neighbor]['in_neighbors'].remove(u)
 
             V.remove(u)
-        # print(f'{k}-hypercore: {V}')
-        # print(f'Remaining Edges: {HE}')
         
         if len(V) == 0:
-            # print(f'{k}-hypercore is empty: finish decomposition')
             break
 
         if k > 100:
@@ -50,11 +43,8 @@ def run(graph, HE):
         graph_ = copy.deepcopy(graph)
 
         for o in range(1, len(V)): # O(o_max * V * E_DH)
-            # print(f'===== ({k},{o-1})-core =====')
-            # print(f'nodes: {V_}')
             for node in V_:
                 if len(graph_.nodes[node]['out_neighbors']) < o:
-                    # print(f'{node}: o = {o-1}')
                     Q.put(node)
 
             while not Q.empty():
@@ -66,14 +56,12 @@ def run(graph, HE):
                         v = HE_[hyperedge_id].pop()
                         graph_.nodes[v]['hyperedges'].remove(hyperedge_id)
                         if len(graph_.nodes[v]['hyperedges']) < k and v not in list(Q.queue):
-                            # print(f'{v}: k = {k-1}')
                             Q.put(v)
 
                 for in_neighbor in graph_.nodes[u]['in_neighbors']:
                     if u in graph_.nodes[in_neighbor]['out_neighbors']:
                         graph_.nodes[in_neighbor]['out_neighbors'].remove(u)
                     if len(graph_.nodes[in_neighbor]['out_neighbors']) < o and in_neighbor not in list(Q.queue):
-                        # print(f'{in_neighbor}: o = {o-1}')
                         Q.put(in_neighbor)
                 for out_neighbor in graph_.nodes[u]['out_neighbors']:
                     if u in graph_.nodes[out_neighbor]['in_neighbors']:

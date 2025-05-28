@@ -4,15 +4,13 @@ import psutil
 import os
 import time
 
-import ko
-import ko2
 import ko_core
 import ko_str
-import baseline
+import naive_ko
 import decomposition
 
 parser = argparse.ArgumentParser(description="Peeling Algorithm for Hypergraph (k,o)-core")
-parser.add_argument("--algorithm", help="Algorithm to use", choices=["ko", "str", "baseline", "decom"], default="ko")
+parser.add_argument("--algorithm", help="Algorithm to use", choices=["ko", "str", "naive", "decom"], default="ko")
 parser.add_argument("--hypergraph", help="Path to the hypergraph file"
                     ,default='./ex1.hyp')
 parser.add_argument("--digraph", help="Path to the digraph file"
@@ -45,9 +43,9 @@ if args.algorithm == "ko":
 #     start_time = time.time()
 #     G = ko_str.run(graph, args.k, args.o)
 #     end_time = time.time()
-# elif args.algorithm == "str":
+# elif args.algorithm == "naive":
 #     start_time = time.time()
-#     G = baseline.run(graph, args.k, args.o)
+#     G = naive_ko.run(graph, args.k, args.o)
 #     end_time = time.time()
 elif args.algorithm == "decom":
     start_time = time.time()
