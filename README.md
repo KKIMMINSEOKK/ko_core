@@ -4,7 +4,7 @@
 ```
 python main.py --hypergraph <hypergraph_path> --digraph <digraph_path> --algorithm ko --k <k_value> --s <s_value>
 ```
-# Example
+### Example
 ```
 python main.py --hypergraph ./datasets/congress/network.hyp --digraph ./datasets/congress/network.dir --algorithm ko --k 2 --o 2
 ```
@@ -13,7 +13,7 @@ python main.py --hypergraph ./datasets/congress/network.hyp --digraph ./datasets
 ```
 python main.py --hypergraph <hypergraph_path> --digraph <digraph_path> --algorithm decom
 ```
-# Example
+### Example
 ```
 python main.py --hypergraph ./datasets/congress/network.hyp --digraph ./datasets/congress/network.dir --algorithm decom
 ```
